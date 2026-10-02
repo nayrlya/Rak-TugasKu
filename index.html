@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rak Tugasku untuk Mahasiswa</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <h1>Rak Tugasku</h1>
+        <p class="muted">Daftar tugas yang mau dikerjakan</p>
+        <p id="quote" class="muted"></p>
+      </div>
+      <button class="btn ghost" id="theme" aria-label="Ganti tema">
+        Mode gelap
+      </button>
+    </header>
+
+    <div class="overall">
+      <div class="bar">
+        <i id="overallBar" style="background: var(--mint)"></i>
+      </div>
+      <span id="overallText" class="muted"></span>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab on" data-i="0">Tugas</button>
+      <button class="tab" data-i="1">Statistik</button>
+      <button class="tab" data-i="2">Alat</button>
+    </nav>
+
+    <div class="viewport">
+      <div class="track" id="track">
+        <!-- SLIDE 1: TUGAS -->
+        <section class="slide" aria-label="Tugas">
+          <form id="form" class="add">
+            <input id="text" placeholder="Tulis tugas baru..." required />
+            <select id="prio" aria-label="Prioritas">
+              <option value="tinggi">Tinggi</option>
+              <option value="sedang" selected>Sedang</option>
+              <option value="rendah">Rendah</option>
+            </select>
+            <input id="due" type="date" aria-label="Tenggat" />
+            <button class="btn" type="submit">Tambah</button>
+          </form>
+          <div class="tools">
+            <input
+              id="search"
+              type="search"
+              placeholder="Cari tugas..."
+              aria-label="Cari"
+            />
+            <div class="chips" id="filters">
+              <button class="chip on" data-f="semua">Semua</button>
+              <button class="chip" data-f="belum">Belum selesai</button>
+              <button class="chip" data-f="selesai">Selesai</button>
+            </div>
+            <select id="sort" aria-label="Urutkan">
+              <option value="baru">Terbaru</option>
+              <option value="prio">Prioritas</option>
+              <option value="due">Tenggat</option>
+            </select>
+            <button class="btn ghost" id="clearDone">Hapus yang selesai</button>
+          </div>
+          <ul id="list" class="list"></ul>
+          <p id="empty" class="muted center" hidden>
+            Belum ada tugas di sini. Tulis satu di atas untuk mulai.
+          </p>
+        </section>
+
+        <!-- SLIDE 2: STATISTIK -->
+        <section class="slide" aria-label="Statistik">
+          <h2>Menurut prioritas</h2>
+          <div id="prioBars" class="bars"></div>
+          <h2>Selesai 7 hari terakhir</h2>
+          <div id="weekBars" class="week"></div>
+        </section>
+
+        <!-- SLIDE 3: ALAT -->
+        <section class="slide" aria-label="Alat">
+          <div class="tools-grid">
+            <div class="panel" style="background: var(--pink)">
+              <h2>Timer fokus</h2>
+              <div class="time" id="timeText">25:00</div>
+              <div class="row">
+                <button class="btn" id="tStart">Mulai</button>
+                <button class="btn ghost" id="tReset">Ulang</button>
+              </div>
+              <div class="row">
+                <button class="chip on" data-m="25">Fokus 25</button>
+                <button class="chip" data-m="5">Istirahat 5</button>
+              </div>
+            </div>
+            <div class="panel" style="background: var(--butter)">
+              <h2>Baca buku hari ini</h2>
+              <label
+                >Target halaman
+                <input id="goal" type="number" min="1" value="20"
+              /></label>
+              <div class="row">
+                <input
+                  id="pages"
+                  type="number"
+                  min="1"
+                  placeholder="Jumlah halaman"
+                /><button class="btn" id="addPages">Catat</button>
+              </div>
+              <div class="bar">
+                <i id="readBar" style="background: var(--sky)"></i>
+              </div>
+              <p id="readText" class="muted"></p>
+              <ul id="readLog" class="log"></ul>
+              <button class="btn ghost" id="resetRead" hidden>
+                Hapus semua hari ini
+              </button>
+            </div>
+            <div class="panel" style="background: var(--sky)">
+              <h2>Acak tugas</h2>
+              <p class="muted">
+                Bingung mulai dari mana? Biar rak yang memilihkan.
+              </p>
+              <button class="btn" id="pick">Pilihkan satu tugas</button>
+              <p id="picked" class="pick"></p>
+            </div>
+            <div class="panel" style="background: var(--lavender)">
+              <h2>Cadangan data</h2>
+              <p class="muted">
+                Simpan atau pulihkan daftar tugasmu sebagai file.
+              </p>
+              <div class="row">
+                <button class="btn" id="export">Unduh</button
+                ><button class="btn ghost" id="import">Pulihkan</button>
+              </div>
+              <input type="file" id="file" accept="application/json" hidden />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="nav2">
+      <button class="btn ghost" id="prev">Sebelumnya</button>
+      <button class="btn ghost" id="next">Berikutnya</button>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
